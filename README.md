@@ -1,6 +1,6 @@
 # Smart Chess Embedded Project
 
-This project is an embedded system implementation of a smart chess game.
+This project is an embedded system implementation of a smart chess pvp game.
 
 ## Table of Contents
 
@@ -23,6 +23,10 @@ Our project is a smart chess embedded system, designed and built from the ground
 - **Raspberry Pi Pico**: The heart of the system is a Raspberry Pi Pico, controlling all operations and ensuring smooth gameplay.
 
 ## Pictures
+
+![Chessboard](./pictures/result.jpeg)
+
+![Chessboard](./pictures/chessboard.jpg)
 
 ## License
 

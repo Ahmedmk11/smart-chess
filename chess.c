@@ -19,19 +19,19 @@ const uint8_t colPins[COLS] = {6, 7, 8, 9};
 // Chess board
 // =============================================================================
 
-// Starting Board
-char board[9][9] = {
-//    0    1    2    3    4    5    6    7    8
-    {' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '}, // 0
-    {' ', 'B', 'P', ' ', ' ', ' ', ' ', 'p', 'r'}, // A
-    {' ', 'N', 'P', ' ', ' ', ' ', ' ', 'p', 'n'}, // B
-    {' ', 'B', 'P', ' ', ' ', ' ', ' ', 'p', 'b'}, // C
-    {' ', 'Q', 'P', ' ', ' ', ' ', ' ', 'p', 'q'}, // D
-    {' ', 'K', 'P', ' ', ' ', ' ', ' ', 'p', 'k'}, // E
-    {' ', 'B', 'P', ' ', ' ', ' ', ' ', 'p', 'b'}, // F
-    {' ', 'N', 'P', ' ', ' ', ' ', ' ', 'p', 'n'}, // G
-    {' ', 'R', 'P', ' ', ' ', ' ', ' ', 'p', 'r'}, // H
-};
+// // Starting Board
+// char board[9][9] = {
+// //    0    1    2    3    4    5    6    7    8
+//     {' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '}, // 0
+//     {' ', 'B', 'P', ' ', ' ', ' ', ' ', 'p', 'r'}, // A
+//     {' ', 'N', 'P', ' ', ' ', ' ', ' ', 'p', 'n'}, // B
+//     {' ', 'B', 'P', ' ', ' ', ' ', ' ', 'p', 'b'}, // C
+//     {' ', 'Q', 'P', ' ', ' ', ' ', ' ', 'p', 'q'}, // D
+//     {' ', 'K', 'P', ' ', ' ', ' ', ' ', 'p', 'k'}, // E
+//     {' ', 'B', 'P', ' ', ' ', ' ', ' ', 'p', 'b'}, // F
+//     {' ', 'N', 'P', ' ', ' ', ' ', ' ', 'p', 'n'}, // G
+//     {' ', 'R', 'P', ' ', ' ', ' ', ' ', 'p', 'r'}, // H
+// };
 
 // =============================================================================
 // Puzzles
@@ -67,20 +67,20 @@ char board[9][9] = {
 //     {' ', ' ', 'P', ' ', ' ', ' ', 'p', ' ', ' '}, // H
 // };
 
-// // Milan Vidmar vs. Max Euwe
-// // Solution: 1. Qf8+ Kxf8 2. Rd8#
-// char board[9][9] = {
-// //    0    1    2    3    4    5    6    7    8
-//     {' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '}, // 0
-//     {' ', ' ', 'P', 'Q', ' ', 'p', ' ', ' ', ' '}, // A
-//     {' ', ' ', 'P', ' ', ' ', ' ', 'p', ' ', ' '}, // B
-//     {' ', ' ', 'r', ' ', ' ', ' ', ' ', ' ', ' '}, // C
-//     {' ', 'R', ' ', ' ', ' ', ' ', ' ', ' ', ' '}, // D
-//     {' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '}, // E
-//     {' ', ' ', ' ', ' ', 'q', 'N', ' ', 'p', ' '}, // F
-//     {' ', ' ', ' ', ' ', ' ', 'p', ' ', ' ', 'k'}, // G
-//     {' ', 'K', ' ', 'P', ' ', ' ', 'p', ' ', ' '}, // H
-// };
+// Milan Vidmar vs. Max Euwe
+// Solution: 1. Qf8+ Kxf8 2. Rd8#
+char board[9][9] = {
+//    0    1    2    3    4    5    6    7    8
+    {' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '}, // 0
+    {' ', ' ', 'P', 'Q', ' ', 'p', ' ', ' ', ' '}, // A
+    {' ', ' ', 'P', ' ', ' ', ' ', 'p', ' ', ' '}, // B
+    {' ', ' ', 'r', ' ', ' ', ' ', ' ', ' ', ' '}, // C
+    {' ', 'R', ' ', ' ', ' ', ' ', ' ', ' ', ' '}, // D
+    {' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '}, // E
+    {' ', ' ', ' ', ' ', 'q', 'N', ' ', 'p', ' '}, // F
+    {' ', ' ', ' ', ' ', ' ', 'p', ' ', ' ', 'k'}, // G
+    {' ', 'K', ' ', 'P', ' ', ' ', 'p', ' ', ' '}, // H
+};
 
 void printChessboard(char board[9][9]) {
     for (int i = 0; i < 9; ++i) {
@@ -308,7 +308,7 @@ void lightPlayerLed(char currPlayer) {
 }
 
 void blinkAll() {
-        for(int i = 0; i < 30; i++) {
+        for(int i = 0; i < 50; i++) {
         gpio_put(led_red, true);
         sleep_ms(100);
         gpio_put(led_red, false);
@@ -782,8 +782,8 @@ int main() {
             turnOffMagnet();
             printf("Took Input\n");
             input_count = 5;
-            distanceX = (move[0] - '0') * oneSquare;
-            distanceY = (move[1] - '0') * oneSquare;
+            distanceX = (move[0] - '0') * (oneSquare - 250);
+            distanceY = (move[1] - '0') * (oneSquare + 100);
             directionX = 1;
             directionY = 1;
             printf("Distance X: %d, ", distanceX);
@@ -802,8 +802,8 @@ int main() {
             turnOffMagnet();
             printf("Took target input\n");
             input_count = 5;
-            distanceX = (move[2] - '0') * oneSquare;
-            distanceY = (move[3] - '0') * oneSquare;
+            distanceX = (move[2] - '0') * (oneSquare - 250);
+            distanceY = (move[3] - '0') * (oneSquare + 100);
             directionX = 1;
             directionY = 1;
             printf("Distance X: %d, ", distanceX);
@@ -820,8 +820,8 @@ int main() {
                 printf("reached piece\n");
                 int diffX = (move[2] - '0') - (move[0] - '0');
                 int diffY = (move[3] - '0') - (move[1] - '0');
-                distanceX = abs(diffX) * oneSquare;
-                distanceY = abs(diffY) * oneSquare;
+                distanceX = abs(diffX) * (oneSquare - 250);
+                distanceY = abs(diffY) * (oneSquare + 100);
                 directionX = (diffX > 0) ? 1 : 0;
                 directionY = (diffY > 0) ? 1 : 0;
                 printf("Distance X: %d, ", distanceX);
@@ -842,8 +842,8 @@ int main() {
                     initiateKill = 1;
                 }
                 reachedDestination = 1;
-                distanceX = (move[2] - '0') * oneSquare;
-                distanceY = (move[3] - '0') * oneSquare;
+                distanceX = (move[2] - '0') * (oneSquare - 250);
+                distanceY = (move[3] - '0') * (oneSquare + 100);
                 if (goingHome == 1) {
                     distanceY += 1.5 * oneSquare;
                 }
